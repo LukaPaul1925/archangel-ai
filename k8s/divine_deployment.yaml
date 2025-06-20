@@ -1,0 +1,54 @@
+---
+
+#### 12. `k8s/divine_deployment.yaml`
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: archangel-ai-divine
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: archangel-ai-divine
+  template:
+    metadata:
+      labels:
+        app: archangel-ai-divine
+    spec:
+      containers:
+      - name: backend
+        image: archangel-ai-divine:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: PGHOST
+          value: "localhost"
+        - name: PGPORT
+          value: "5432"
+        - name: PGDATABASE
+          value: "kine_medical"
+        - name: PGUSER
+          value: "postgres"
+        - name: PGPASSWORD
+          value: "password"
+      - name: interface
+        image: archangel-ai-divine:latest
+        ports:
+        - containerPort: 8001
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: archangel-ai-divine
+spec:
+  selector:
+    app: archangel-ai-divine
+  ports:
+  - name: backend
+    port: 8000
+    targetPort: 8000
+  - name: interface
+    port: 8001
+    targetPort: 8001
+  type: LoadBalancer
