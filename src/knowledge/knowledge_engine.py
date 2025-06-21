@@ -103,3 +103,16 @@ if __name__ == "__main__":
     text = "Patient presents with chest pain, shortness of breath, and fever, suspect myocardial infarction or sepsis."
     relations = engine.process_clinical_text(text)
     logger.info(f"Extracted relations: {relations}")
+
+
+
+#neo4j connection test
+def test_connection(self):
+    with self.driver.session() as session:
+        result = session.run("CREATE (n:Test {name: 'ARCHANGEL'}) RETURN n")
+        print([record["n"]["name"] for record in result])
+
+if __name__ == "__main__":
+    engine = CosmicKnowledgeEngine()
+    engine.test_connection()
+    engine.close()
