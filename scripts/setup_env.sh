@@ -1,7 +1,10 @@
- #!/bin/bash
-export PGHOST=localhost
-export PGPORT=5432
-export PGDATABASE=kine_medical
-export PGUSER=postgres
-export PGPASSWORD=your_password
+#!/bin/bash
+export PGHOST=$PGHOST
+export PGPORT=$PGPORT
+export PGDATABASE=$PGDATABASE
+export PGUSER=$PGUSER
+export PGPASSWORD=$PGPASSWORD
+export NEO4J_URI=$NEO4J_URI
+export NEO4J_USER=$NEO4J_USER
+export NEO4J_PASSWORD=$NEO4J_PASSWORD
 echo "Environment variables set."
